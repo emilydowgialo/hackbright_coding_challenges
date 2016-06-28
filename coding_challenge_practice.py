@@ -45,8 +45,8 @@ def pig_latin(phrase):
 
     There will be no uppercase letters or punctuation in the phrase.
 
-        >>> pig_latin('hello awesome programmer')
-        'ellohay awesomeyay rogrammerpay'
+    >>> pig_latin('hello awesome programmer')
+    'ellohay awesomeyay rogrammerpay'
     """
 
     # List of pig latin-ified words
@@ -97,6 +97,62 @@ def pig_latin(phrase):
 #     return num_guesses
 
 
+class Node(object):
+    """Class in a linked list."""
+
+    def __init__(self, data, next=None):
+        self.data = data
+        self.next = next
+
+    def as_string(self):
+        """Represent data for this node and it's successors as a string.
+
+        >>> Node(3).as_string()
+        '3'
+
+        >>> Node(3, Node(2, Node(1))).as_string()
+        '321'
+        """
+
+        out = []
+        n = self
+
+        while n:
+            out.append(str(n.data))
+            n = n.next
+
+        return "".join(out)
+
+    def reverse_linked_list(self):
+        """Given LL head node, return head node of new, reversed linked list.
+
+        >>> ll = Node(1, Node(2, Node(3)))
+        >>> ll.reverse_linked_list().as_string()
+        '321'
+        """
+
+        nodes = []
+        n = self
+
+        #traverse nodes and put nodes into a list
+        while n.next is not None:
+            nodes.append(n)
+            n = n.next
+
+        nodes.append(n)
+        # reassign elements in list, nodes right now is [A, B, C]
+        nodes.reverse()
+        for i, node in enumerate(nodes):
+            if i != (len(nodes) - 1):
+                node.next = nodes[i + 1]
+
+            else:
+                node.next = None
+
+        # Return the head node
+        return nodes[0]
+
+
 def split(astring, splitter):
     """Split astring by splitter and return list of splits."""
 
@@ -116,7 +172,7 @@ def split(astring, splitter):
             list_of_splits.append(astring[current_index:])
             break
 
-    print list_of_splits
+    return list_of_splits
 
 split("that is which is that which is that", " that ")
 
@@ -164,6 +220,27 @@ def sort_ab(a, b):
 a = [1, 3, 5, 7]
 b = [2, 6, 8, 10]
 sort_ab(a, b)
+
+
+def missing_number(nums, max_num):
+    """Given a list of numbers 1...max_num, find which one is missing.
+
+    *nums*: list of numbers 1..[max_num]; exactly one digit will be missing.
+    *max_num*: Largest potential number in list
+
+    >>> missing_number([2, 1, 4, 3, 6, 5, 7, 10, 9], 10)
+    8
+    """
+
+    # List of "False" as long as the max number
+    new_list = [False] * max_num
+
+    # Change everything to True
+    for num in nums:
+        new_list[num - 1] = True
+
+    # Find where the remaining False is
+    return new_list.index(False) + 1
 
 
 def show_evens(nums):
