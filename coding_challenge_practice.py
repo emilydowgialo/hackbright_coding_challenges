@@ -67,34 +67,48 @@ def pig_latin(phrase):
     return (" ").join(pigified)
 
 
-# def binary_search(val):
-#     """Using a binary search, find val in a range of 1-100. Return # of guesses.
+def binary_search(val):
+    """Using a binary search, find val in a range of 1-100. Return # of guesses.
 
-#     Construct a list of 1-100 (inclusive). Write a binary search that searches
-#     for val in that list (val will always be a number between 1 and 100).
+    Construct a list of 1-100 (inclusive). Write a binary search that searches
+    for val in that list (val will always be a number between 1 and 100).
 
-#     Return the number of searches it took to find val. For a proper binary search
-#     of 1-100, this should never be more than 7.
+    Return the number of searches it took to find val. For a proper binary search
+    of 1-100, this should never be more than 7.
 
-#     >>> binary_search(50)
-#     1
+    >>> binary_search(50)
+    1
 
-#     >>> binary_search(25)
-#     2
+    >>> binary_search(25)
+    2
 
-#     >>> binary_search(75)
-#     2
+    >>> binary_search(75)
+    2
 
-#     >>> binary_search(31) <= 7
-#     True
+    >>> binary_search(31) <= 7
+    True
 
-#     >>> max([binary_search(i) for i in range(1, 101)])
-#     7
-#     """
+    >>> max([binary_search(i) for i in range(1, 101)])
+    7
+    """
 
-#     num_guesses = 0
+    num_guesses = 0
 
-#     return num_guesses
+    left = 0
+    right = 101
+    guess = None
+
+    while guess != val:
+        num_guesses += 1
+        guess = (right - left)/2 + left
+
+        if val > guess:
+            left = guess
+
+        if val < guess:
+            right = guess
+
+    return num_guesses
 
 
 class Node(object):
@@ -218,6 +232,40 @@ def recursive_index(needle, haystack):
         return 1 + is_this_none
     else:
         return None
+
+
+def print_recursively(lst):
+    """Print items in the list, using recursion.
+
+    For example::
+
+    >>> print_recursively([1, 2, 3])
+    1
+    2
+    3
+
+    """
+
+    # If lst > 0, print the first item in the list and
+    # call the function on the rest of the list
+    if lst:
+        print lst[0]
+        print_recursively(lst[1:])
+
+
+def reverse_linked_list_in_place(lst):
+    """Given linked list, reverse the nodes in this linked list in place."""
+
+    current = lst.head
+    previous = None
+
+    while current.next is not None:
+        next = current.next
+        current.next = previous
+        previous = current
+        current = next
+
+    lst.head = previous
 
 
 def split(astring, splitter):
