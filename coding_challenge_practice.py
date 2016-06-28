@@ -92,12 +92,16 @@ def binary_search(val):
     7
     """
 
+    # Initialize the number of guesses at 0
     num_guesses = 0
 
+    # Set the bounds, which in this case is 1 to 100 inclusively
     left = 0
     right = 101
     guess = None
 
+    # While we have not guessed val, increase the number of guesses and
+    # reset the bounds
     while guess != val:
         num_guesses += 1
         guess = (right - left)/2 + left
@@ -220,6 +224,7 @@ def recursive_index(needle, haystack):
     True
 
     """
+    # Base case
     if len(haystack) == 0:
         return None
 
@@ -228,10 +233,28 @@ def recursive_index(needle, haystack):
 
     is_this_none = recursive_index(needle, haystack[1:])
 
+    # If the list contains items, add 1 and call the function
     if is_this_none is not None:
         return 1 + is_this_none
     else:
         return None
+
+
+def reverse_linked_list_in_place(lst):
+    """Given linked list, reverse the nodes in this linked list in place."""
+
+    # Set the current node's properties
+    current = lst.head
+    previous = None
+
+    # The loop will end when current.next is None, and rebinds each node
+    while current.next is not None:
+        next = current.next
+        current.next = previous
+        previous = current
+        current = next
+
+    lst.head = previous
 
 
 def print_recursively(lst):
@@ -251,21 +274,6 @@ def print_recursively(lst):
     if lst:
         print lst[0]
         print_recursively(lst[1:])
-
-
-def reverse_linked_list_in_place(lst):
-    """Given linked list, reverse the nodes in this linked list in place."""
-
-    current = lst.head
-    previous = None
-
-    while current.next is not None:
-        next = current.next
-        current.next = previous
-        previous = current
-        current = next
-
-    lst.head = previous
 
 
 def split(astring, splitter):
@@ -356,6 +364,56 @@ def missing_number(nums, max_num):
 
     # Find where the remaining False is
     return new_list.index(False) + 1
+
+
+def count_recursively(lst):
+    """Count items in a list recursively.
+
+    For example:
+
+    >>> count_recursively([])
+    0
+
+    >>> count_recursively([1, 2, 3])
+    3
+
+    """
+
+    # Base case: if the list contains no items
+    if not lst:
+        return 0
+
+    # Return 1 and call the function using a sliced list
+    return 1 + count_recursively(lst[1:])
+
+
+def print_digits(num):
+    """Given int, print each digit in reverse order, starting with the ones place.
+
+    For example::
+
+    >>> print_digits(1)
+    1
+
+    >>> print_digits(413)
+    3
+    1
+    4
+
+    >>> print_digits(7331)
+    1
+    3
+    3
+    7
+
+    """
+
+    # Turn num into a string
+    num = str(num)
+
+    # Print numbers starting backwards
+    for n in num[::-1]:
+        print n
 
 
 def show_evens(nums):
