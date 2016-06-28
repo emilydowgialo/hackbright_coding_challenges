@@ -153,6 +153,73 @@ class Node(object):
         return nodes[0]
 
 
+def remove_node(node):
+    """Given a node in a linked list, remove it.
+
+    Remove this node from a linked list. Note that we do not have access to
+    any other nodes of the linked list, like the head or the tail.
+
+    Does not return anything; changes list in place.
+
+    For example::
+
+    >>> ll = Node(1, Node(2, Node(3, Node(4, Node(5)))))  # 1->2->3->4->5
+    >>> three_node = ll.next.next
+    >>> remove_node(three_node)
+    >>> ll.as_string()
+    '1245'
+
+    It's possible to remove the first node::
+
+    >>> ll = Node(1, Node(2, Node(3, Node(4, Node(5)))))  # 1->2->3->4->5
+    >>> one_node = ll
+    >>> remove_node(one_node)
+    >>> ll.as_string()
+    '2345'
+
+    This will never be asked to remove the tail node.
+    """
+
+    node.data = node.next.data
+    node.next = node.next.next
+
+
+def recursive_index(needle, haystack):
+    """Given list (haystack), return index (0-based) of needle in the list.
+
+    Return None if needle is not in haystack.
+
+    Do this with recursion. You MAY NOT USE A `for` OR `while` LOOP.
+
+    For example:
+
+    >>> recursive_index(5, [1, 3, 5, 2, 4])
+    2
+
+    >>> recursive_index("hey", ["hey", "there", "you"])
+    0
+
+    >>> recursive_index("you", ["hey", "there", "you"])
+    2
+
+    >>> recursive_index("zork", ["foo", "bar", "baz"]) is None
+    True
+
+    """
+    if len(haystack) == 0:
+        return None
+
+    if haystack[0] == needle:
+        return 0
+
+    is_this_none = recursive_index(needle, haystack[1:])
+
+    if is_this_none is not None:
+        return 1 + is_this_none
+    else:
+        return None
+
+
 def split(astring, splitter):
     """Split astring by splitter and return list of splits."""
 
