@@ -20,6 +20,7 @@ class TreeNode(object):
 
 
 def to_find(node, data):
+  """ Recursively find the node """
 
   # Base case
   if node.data == data:
@@ -34,6 +35,39 @@ def to_find(node, data):
       return found_node
 
   return None
+
+
+def find_node(self, data):
+  """ Non-recursively find the node using DEPTH-FIRST SEARCH """
+
+  to_visit = [self]
+
+  while to_visit:
+
+    # Depth-first search because this traverses the tree and each node's children
+    node = to_visit.pop()
+
+    if node.data == data:
+      return node
+
+    to_visit.extend(node.children)
+
+
+def find_node_breadth(self, data):
+  """ Non-recursively find the node using BREADTH-FIRST SEARCH """
+
+  to_visit = [self]
+
+  while to_visit:
+
+    # Breadth-first because popping from the front - this means first in
+    # first out is happening
+    node = to_visit.pop(0)
+
+    if node.data == data:
+      return node
+
+    to_visit.extend(node.children)
 
 
 treeroot = TreeNode('Sharon', [
