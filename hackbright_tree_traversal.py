@@ -1,9 +1,10 @@
 class LinkedListNode(object):
 
-  def node(self, data=None, next_node=None):
+  def node(self, data=None, next_node=None, prev_node=None):
 
     self.data = data
     self.next = next_node
+    self.prev = prev_node
 
 
 class TreeNode(object):
