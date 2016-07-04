@@ -36,3 +36,22 @@ class FriendGraph(object):
 
         person2.adjacent.add(person1)
         person1.adjacent.add(person2)
+
+class CheckIfFriends(object):
+
+    def are_they_friends(self, person1, person2, seen=None):
+        """ Recursively check to see if two people are friends on a graph """
+
+    if not seen:
+        seen = set()
+
+    if person1 is person2:
+        return True
+
+    # Keep track of the person node that we've seen before
+    seen.add(person1)
+    for person in person1.adjacent - seen:
+        if self.are_they_friends(person, person2, seen):
+            return True
+
+    return False
