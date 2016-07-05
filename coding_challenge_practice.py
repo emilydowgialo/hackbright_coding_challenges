@@ -1,5 +1,5 @@
 def decode(s):
-    """Decode a string.
+    """ Decode a string.
 
     A valid code is a sequence of numbers and letter, always starting with a number
     and ending with letter(s).
@@ -41,7 +41,7 @@ def decode(s):
 
 
 def pig_latin(phrase):
-    """Turn a phrase into pig latin.
+    """ Turn a phrase into pig latin.
 
     There will be no uppercase letters or punctuation in the phrase.
 
@@ -68,7 +68,7 @@ def pig_latin(phrase):
 
 
 def binary_search(val):
-    """Using a binary search, find val in a range of 1-100. Return # of guesses.
+    """ Using a binary search, find val in a range of 1-100. Return # of guesses.
 
     Construct a list of 1-100 (inclusive). Write a binary search that searches
     for val in that list (val will always be a number between 1 and 100).
@@ -116,7 +116,7 @@ def binary_search(val):
 
 
 class Node(object):
-    """Class in a linked list."""
+    """ Class in a linked list."""
 
     def __init__(self, data, next=None):
         self.data = data
@@ -142,7 +142,7 @@ class Node(object):
         return "".join(out)
 
     def reverse_linked_list(self):
-        """Given LL head node, return head node of new, reversed linked list.
+        """ Given LL head node, return head node of new, reversed linked list.
 
         >>> ll = Node(1, Node(2, Node(3)))
         >>> ll.reverse_linked_list().as_string()
@@ -172,7 +172,7 @@ class Node(object):
 
 
 def remove_node(node):
-    """Given a node in a linked list, remove it.
+    """ Given a node in a linked list, remove it.
 
     Remove this node from a linked list. Note that we do not have access to
     any other nodes of the linked list, like the head or the tail.
@@ -203,7 +203,7 @@ def remove_node(node):
 
 
 def recursive_index(needle, haystack):
-    """Given list (haystack), return index (0-based) of needle in the list.
+    """ Given list (haystack), return index (0-based) of needle in the list.
 
     Return None if needle is not in haystack.
 
@@ -241,7 +241,7 @@ def recursive_index(needle, haystack):
 
 
 def reverse_linked_list_in_place(lst):
-    """Given linked list, reverse the nodes in this linked list in place."""
+    """ Given linked list, reverse the nodes in this linked list in place."""
 
     # Set the current node's properties
     current = lst.head
@@ -258,7 +258,7 @@ def reverse_linked_list_in_place(lst):
 
 
 def print_recursively(lst):
-    """Print items in the list, using recursion.
+    """ Print items in the list, using recursion.
 
     For example::
 
@@ -277,7 +277,7 @@ def print_recursively(lst):
 
 
 def split(astring, splitter):
-    """Split astring by splitter and return list of splits."""
+    """ Split astring by splitter and return list of splits."""
 
     list_of_splits = []
     index = 0
@@ -301,7 +301,7 @@ split("that is which is that which is that", " that ")
 
 
 def sort_ab(a, b):
-    """Given already-sorted lists, `a` and `b`, return sorted list of both.
+    """ Given already-sorted lists, `a` and `b`, return sorted list of both.
 
     You may not use sorted() or .sort().
 
@@ -346,7 +346,7 @@ sort_ab(a, b)
 
 
 def missing_number(nums, max_num):
-    """Given a list of numbers 1...max_num, find which one is missing.
+    """ Given a list of numbers 1...max_num, find which one is missing.
 
     *nums*: list of numbers 1..[max_num]; exactly one digit will be missing.
     *max_num*: Largest potential number in list
@@ -367,7 +367,7 @@ def missing_number(nums, max_num):
 
 
 def count_recursively(lst):
-    """Count items in a list recursively.
+    """ Count items in a list recursively.
 
     For example:
 
@@ -388,7 +388,7 @@ def count_recursively(lst):
 
 
 def print_digits(num):
-    """Given int, print each digit in reverse order, starting with the ones place.
+    """ Given int, print each digit in reverse order, starting with the ones place.
 
     For example::
 
@@ -417,7 +417,7 @@ def print_digits(num):
 
 
 def show_evens(nums):
-    """Given list of ints, return list of *indices* of even numbers in list.
+    """ Given list of ints, return list of *indices* of even numbers in list.
 
     For example::
 
@@ -441,6 +441,72 @@ def show_evens(nums):
             indexes.append(index)
 
     return indexes
+
+
+def make_change(num):
+    """ Given a change amount, how many of each coin to give to customer?
+
+    >>> make_change(.96)
+    [3, 2, 0, 1]
+    """
+    num = int(num * 100)
+
+    # [quarters, dimes, nickels, pennies]
+    coin_amounts = [25, 10, 5, 1]
+    coin_list = [0, 0, 0, 0]
+
+    # if (num / 25) > 0:
+    #     coin_list[0] = (num / 25)
+    #     new_amount = (num % 25)
+
+    # if (new_amount / 10) > 0:
+    #     coin_list[1] = (new_amount / 10)
+    #     new_amount = (new_amount % 10)
+
+    # if (new_amount / 5) > 0:
+    #     coin_list[2] = (new_amount / 5)
+    #     new_amount = (num % 5)
+
+    # if new_amount < 10:
+    #     coin_list[3] = new_amount
+
+    index = 0
+    for amount in coin_amounts:
+        coin_list[index] = (num / amount)
+        num = (num % amount)
+        index += 1
+
+    return coin_list
+
+
+def is_anagram_of_palindrome(word):
+    """ Is the word an anagram of a palindrome?
+
+    >>> is_anagram_of_palindrome("racecar")
+    True
+
+    >>> is_anagram_of_palindrome("ajshgdjh")
+    False
+    """
+
+    # {Key: value} - {letter: frequency}
+    seen = {}
+
+    for letter in word:
+        count = seen.get(letter, 0)
+        seen[letter] = count + 1
+
+    is_an_odd = 0
+
+    for count in seen.values():
+        if count % 2 != 0:
+            is_an_odd += 1
+
+    if is_an_odd > 1:
+        return False
+
+    else:
+        return True
 
 
 if __name__ == '__main__':
