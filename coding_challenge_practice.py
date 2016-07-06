@@ -24,18 +24,31 @@ def decode(s):
     'hey'
     """
 
-    index = 0
+    # index = 0
 
-    # Initialize an empty string for the new string
+    # # Initialize an empty string for the new string
+    # string = ""
+
+    # for i in s:
+    #     index += 1
+
+    #     # Check if i is an integer, and add letter at an index that many spots
+    #     # ahead of the current index to the string
+    #     if i.isdigit():
+    #         string += s[index + int(i)]
+
+    # return string
+
     string = ""
+    i = 0
 
-    for i in s:
-        index += 1
+    while i < len(s):
+        how_many_to_skip = int(s[i])
+        i += how_many_to_skip + 1
 
-        # Check if i is an integer, and add letter at an index that many spots
-        # ahead of the current index to the string
-        if i.isdigit():
-            string += s[index + int(i)]
+        string += s[i]
+
+        i += 1
 
     return string
 
